@@ -1,10 +1,10 @@
 class ResponseHandlerModel {
   String _message = 'No Message';
   bool _status = false;
-  List<Map<String, dynamic>>? _data;
+  Map<String, dynamic>? _data;
 
   ResponseHandlerModel(
-      {required String message, required bool status, List<Map<String, dynamic>>? data}) {
+      {required String message, required bool status, Map<String, dynamic>? data}) {
     _message = message;
     _status = status;
     _data = data;
@@ -19,15 +19,15 @@ class ResponseHandlerModel {
   // ignore: unnecessary_getters_setters
   set status(bool status) => _status = status;
   // ignore: unnecessary_getters_setters
-  List<Map<String, dynamic>> get data => _data!;
+  Map<String, dynamic> get data => _data!;
   // ignore: unnecessary_getters_setters
-  set data(List<Map<String, dynamic>> data) => _data = data;
+  set data(Map<String, dynamic> data) => _data = data;
 
   ResponseHandlerModel.fromJson(Map<String, dynamic> json) {
     _message = json['message'];
     _status = json['status'];
     _data = (json['data'] != null
-        ? List<Map<String, dynamic>>.from(json['data'])
+        ? Map<String, dynamic>.from(json['data'])
         : null)!;
   }
 

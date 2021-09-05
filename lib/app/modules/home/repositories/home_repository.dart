@@ -13,10 +13,10 @@ class HomeRepository extends Disposable {
   Future<ResponseHandlerModel> fetchGifCat() async {
     try {
       final response = await client
-          .get(dotenv.get('BASE_URL') + CAT_GIF_PATH);
+          .get(dotenv.get('BASE_URL'));
       return ResponseHandlerModel(
-          status: response.data['status'],
-          message: response.data['message'],
+          status: true,
+          message: 'OK',
           data: response.data);
     } catch (e) {
       return ResponseHandlerModel(status: false, message: e.toString());

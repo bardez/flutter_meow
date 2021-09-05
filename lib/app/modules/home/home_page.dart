@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_meow/app/components/custom_loader/custom_loader.dart';
+import 'package:flutter_meow/app/shared/models/response_handler_model.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:mobx/mobx.dart';
+import 'package:oktoast/oktoast.dart';
 
 import 'home_store.dart';
 
@@ -33,7 +36,13 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
       appBar: AppBar(
         title: const Text('Meow!!!'),
       ),
-      body: Container(),
+      body: Observer(builder: (BuildContext context) { 
+        if(store.imageUrl.isNotEmpty){
+          return Image.network(store.imageUrl);
+        } else {
+          return Container();
+        }
+       },),
       floatingActionButton: SpeedDial(
           icon: Icons.add,
           activeIcon: Icons.close,
@@ -59,22 +68,31 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
               backgroundColor: Colors.red,
               foregroundColor: Colors.white,
               label: 'Gif',
-              onTap: () => LoadingOverlay.of(context).during(Future.delayed(const Duration(seconds: 5))),
+              onTap: () async{
+                LoadingOverlay.of(context).show();
+                ResponseHandlerModel response = await store.getRandomGifCat();
+                LoadingOverlay.of(context).hide();
+                if( response.status == true ){
+                  store.setImageUrl(response.data['data']['bitly_url']);
+                } else {
+                  showToast(response.message);
+                }
+              },
             ),
-            SpeedDialChild(
-              child: const Icon(Icons.help_sharp),
-              backgroundColor: Colors.deepOrange,
-              foregroundColor: Colors.white,
-              label: 'Random',
-              onTap: () => print('SECOND CHILD'),
-            ),
-            SpeedDialChild(
-              child: const Icon(Icons.text_format),
-              backgroundColor: Colors.indigo,
-              foregroundColor: Colors.white,
-              label: 'With text',
-              onTap: () => print('THIRD CHILD'),
-            ),
+            // SpeedDialChild(
+            //   child: const Icon(Icons.help_sharp),
+            //   backgroundColor: Colors.deepOrange,
+            //   foregroundColor: Colors.white,
+            //   label: 'Random',
+            //   onTap: () => print('SECOND CHILD'),
+            // ),
+            // SpeedDialChild(
+            //   child: const Icon(Icons.text_format),
+            //   backgroundColor: Colors.indigo,
+            //   foregroundColor: Colors.white,
+            //   label: 'With text',
+            //   onTap: () => print('THIRD CHILD'),
+            // ),
           ],
         ),
       )
