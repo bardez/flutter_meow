@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:load/load.dart';
+
+import 'components/custom_loader/custom_loader.dart';
 
 class AppWidget extends StatelessWidget {
   @override

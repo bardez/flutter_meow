@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_meow/app/components/custom_loader/custom_loader.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -32,9 +33,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
       appBar: AppBar(
         title: const Text('Meow!!!'),
       ),
-      body: Observer(
-        builder: (context) => Text('${store.counter}'),
-      ),
+      body: Container(),
       floatingActionButton: SpeedDial(
           icon: Icons.add,
           activeIcon: Icons.close,
@@ -60,7 +59,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
               backgroundColor: Colors.red,
               foregroundColor: Colors.white,
               label: 'Gif',
-              onTap: () => print("FIRST CHILD"),
+              onTap: () => LoadingOverlay.of(context).during(Future.delayed(const Duration(seconds: 5))),
             ),
             SpeedDialChild(
               child: const Icon(Icons.help_sharp),

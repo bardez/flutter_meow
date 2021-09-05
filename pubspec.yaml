@@ -40,6 +40,8 @@ dependencies:
   dio: ^4.0.0
   flutter_speed_dial: ^4.3.0
   flutter_dotenv: ^5.0.2
+  load: ^1.0.0
+  lottie: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -69,6 +71,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - .env
+    - resources/lottie_animations/loader_animation1.json
+    - resources/lottie_animations/loader_animation2.json
+    - resources/lottie_animations/loader_cat.json
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
