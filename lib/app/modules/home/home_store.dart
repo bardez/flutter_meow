@@ -10,7 +10,7 @@ class HomeStore = HomeStoreBase with _$HomeStore;
 abstract class HomeStoreBase with Store {
   final homeApi = Modular.get<HomeRepository>();
   @observable
-  late Map imageData;
+  Map imageData = {};
 
   @action
   void setImageData(dynamic data) => imageData = data;
