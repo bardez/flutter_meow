@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutter_meow">
+    package="br.com.bardez.flutter_meow">
    <application
         android:label="flutter_meow"
         android:icon="@mipmap/ic_launcher">

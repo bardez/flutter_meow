@@ -7,6 +7,10 @@ A flutter meow project made for use case tests.
 - Flutter 2.6.0-0.0.pre • channel dev
 - Slidy 3.2.2+1   
 
+## GIFs API reference
+
+https://developers.giphy.com/docs/api/endpoint#random
+
 ## Getting Started
 
 This project is a starting point for a Flutter application. Created with slidy (https://pub.dev/packages/slidy)
@@ -23,3 +27,21 @@ If you don't use slidy package, you can run ```flutter clean```, ```flutter pub 
 ## Runing application
 
 ```flutter run``` or debug using an IDE like Visual Studio Code, JetBrains or Android Studio.
+
+## Features
+
+- Custom Loader (Served Widget like a plugin)
+- Interceptor treatment
+- Secure Environment variables
+- Handler and Models
+- Use of repository
+- Static util class
+
+## CUSTOM SETTINGS
+
+Change/create a ```.env``` file on application root with base variables. Model:
+
+```
+BASE_URL=https://api.giphy.com/v1/gifs/
+API_KEY=0UTRbFtkMxAplrohufYco5IY74U8hOes
+```

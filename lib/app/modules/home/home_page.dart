@@ -41,10 +41,12 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
           Center(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
+              // Observe used for listen changes on store observables variables
               child: Observer(builder: (BuildContext context) { 
                 if(store.imageData.isNotEmpty){
                   return Column(
                     children: [
+                      //Component to show placeholder if image not rendered yet
                       FadeInImage.assetNetwork(placeholder: 'resources/loading.gif', image: store.imageData['image_original_url']),
                       Text(store.imageData['title'])
                     ],
@@ -58,6 +60,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
           
         ],
       ),
+      //Plugin to use multi options customizables on Floating action
       floatingActionButton: SpeedDial(
           icon: Icons.add,
           activeIcon: Icons.close,
@@ -76,7 +79,6 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
           elevation: 8.0,
           isOpenOnStart: false,
           animationSpeed: 200,
-          // childMargin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           children: [
             SpeedDialChild(
               child: const Icon(Icons.gif),
@@ -84,7 +86,9 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
               foregroundColor: Colors.white,
               label: 'Gif',
               onTap: () async{
+                //Custom Overlay
                 LoadingOverlay.of(context).show();
+                //response with model previously mapped to craete a response patttern
                 ResponseHandlerModel response = await store.getRandomGifCat();
                 LoadingOverlay.of(context).hide();
                 if( response.status == true ){

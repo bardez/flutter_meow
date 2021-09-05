@@ -9,6 +9,7 @@ class HomeStore = HomeStoreBase with _$HomeStore;
 
 abstract class HomeStoreBase with Store {
   final homeApi = Modular.get<HomeRepository>();
+  
   @observable
   Map imageData = {};
 
