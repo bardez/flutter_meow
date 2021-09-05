@@ -10,12 +10,15 @@ class HomeStore = HomeStoreBase with _$HomeStore;
 abstract class HomeStoreBase with Store {
   final homeApi = Modular.get<HomeRepository>();
   @observable
-  String imageUrl = '';
+  late Map imageData;
 
   @action
-  void setImageUrl(String dataUrl) => imageUrl = dataUrl;
+  void setImageData(dynamic data) => imageData = data;
 
   Future<ResponseHandlerModel> getRandomGifCat() async {
     return await homeApi.fetchGifCat();
+  }
+  Future<ResponseHandlerModel> getNotFoundTag() async {
+    return await homeApi.fecthNotFoundTag();
   }
 }

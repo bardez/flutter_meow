@@ -75,6 +75,7 @@ flutter:
     - resources/lottie_animations/loader_animation1.json
     - resources/lottie_animations/loader_animation2.json
     - resources/lottie_animations/loader_cat.json
+    - resources/loading.gif
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

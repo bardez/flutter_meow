@@ -13,7 +13,7 @@ class HomeRepository extends Disposable {
   Future<ResponseHandlerModel> fetchGifCat() async {
     try {
       final response = await client
-          .get(dotenv.get('BASE_URL'));
+          .get(dotenv.get('BASE_URL')+'random?api_key='+dotenv.get('API_KEY')+'&tag=cat');
       return ResponseHandlerModel(
           status: true,
           message: 'OK',
@@ -23,13 +23,13 @@ class HomeRepository extends Disposable {
     }
   }
 
-  Future<ResponseHandlerModel> fetchRandomCat() async {
+  Future<ResponseHandlerModel> fecthNotFoundTag() async {
     try {
       final response = await client
-          .get(dotenv.get('BASE_URL'));
+          .get(dotenv.get('BASE_URL')+'random?api_key='+dotenv.get('API_KEY')+'&tag=kdfjaidhfao');
       return ResponseHandlerModel(
-          status: response.data['status'],
-          message: response.data['message'],
+          status: true,
+          message: 'OK',
           data: response.data);
     } catch (e) {
       return ResponseHandlerModel(status: false, message: e.toString());

@@ -9,18 +9,18 @@ part of 'home_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeStore on HomeStoreBase, Store {
-  final _$imageUrlAtom = Atom(name: 'HomeStoreBase.imageUrl');
+  final _$imageDataAtom = Atom(name: 'HomeStoreBase.imageData');
 
   @override
-  String get imageUrl {
-    _$imageUrlAtom.reportRead();
-    return super.imageUrl;
+  Map<dynamic, dynamic> get imageData {
+    _$imageDataAtom.reportRead();
+    return super.imageData;
   }
 
   @override
-  set imageUrl(String value) {
-    _$imageUrlAtom.reportWrite(value, super.imageUrl, () {
-      super.imageUrl = value;
+  set imageData(Map<dynamic, dynamic> value) {
+    _$imageDataAtom.reportWrite(value, super.imageData, () {
+      super.imageData = value;
     });
   }
 
@@ -28,11 +28,11 @@ mixin _$HomeStore on HomeStoreBase, Store {
       ActionController(name: 'HomeStoreBase');
 
   @override
-  void setImageUrl(String dataUrl) {
+  void setImageData(dynamic data) {
     final _$actionInfo = _$HomeStoreBaseActionController.startAction(
-        name: 'HomeStoreBase.setImageUrl');
+        name: 'HomeStoreBase.setImageData');
     try {
-      return super.setImageUrl(dataUrl);
+      return super.setImageData(data);
     } finally {
       _$HomeStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -41,7 +41,7 @@ mixin _$HomeStore on HomeStoreBase, Store {
   @override
   String toString() {
     return '''
-imageUrl: ${imageUrl}
+imageData: ${imageData}
     ''';
   }
 }

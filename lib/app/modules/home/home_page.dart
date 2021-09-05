@@ -36,19 +36,34 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
       appBar: AppBar(
         title: const Text('Meow!!!'),
       ),
-      body: Observer(builder: (BuildContext context) { 
-        if(store.imageUrl.isNotEmpty){
-          return Image.network(store.imageUrl);
-        } else {
-          return Container();
-        }
-       },),
+      body: Column(
+        children: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Observer(builder: (BuildContext context) { 
+                if(store.imageData.isNotEmpty){
+                  return Column(
+                    children: [
+                      FadeInImage.assetNetwork(placeholder: 'resources/loading.gif', image: store.imageData['image_original_url']),
+                      Text(store.imageData['title'])
+                    ],
+                  );
+                } else {
+                  return Container();
+                }
+               },),
+            ),
+          ),
+          
+        ],
+      ),
       floatingActionButton: SpeedDial(
           icon: Icons.add,
           activeIcon: Icons.close,
           spacing: 3,
           openCloseDial: isDialOpen,
-          childPadding: EdgeInsets.all(5),
+          childPadding: const EdgeInsets.all(5),
           spaceBetweenChildren: 4,
           buttonSize: 56,
           visible: true,
@@ -65,7 +80,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
           children: [
             SpeedDialChild(
               child: const Icon(Icons.gif),
-              backgroundColor: Colors.red,
+              backgroundColor: Colors.green,
               foregroundColor: Colors.white,
               label: 'Gif',
               onTap: () async{
@@ -73,26 +88,32 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                 ResponseHandlerModel response = await store.getRandomGifCat();
                 LoadingOverlay.of(context).hide();
                 if( response.status == true ){
-                  store.setImageUrl(response.data['data']['image_original_url']);
+                  store.setImageData(response.data['data']);
                 } else {
                   showToast(response.message);
                 }
               },
             ),
-            // SpeedDialChild(
-            //   child: const Icon(Icons.help_sharp),
-            //   backgroundColor: Colors.deepOrange,
-            //   foregroundColor: Colors.white,
-            //   label: 'Random',
-            //   onTap: () => print('SECOND CHILD'),
-            // ),
-            // SpeedDialChild(
-            //   child: const Icon(Icons.text_format),
-            //   backgroundColor: Colors.indigo,
-            //   foregroundColor: Colors.white,
-            //   label: 'With text',
-            //   onTap: () => print('THIRD CHILD'),
-            // ),
+            SpeedDialChild(
+              child: const Icon(Icons.error_sharp),
+              backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
+              label: 'Not found example',
+              onTap: () async{
+                LoadingOverlay.of(context).show();
+                ResponseHandlerModel response = await store.getNotFoundTag();
+                if( response.status == true ){
+                  if(response.data['data'].length > 0){
+                    store.setImageData(response.data['data']);
+                  } else {
+                    showToast('No images found for this tag');
+                  }
+                  LoadingOverlay.of(context).hide();
+                } else {
+                  showToast(response.message);
+                }
+              },
+            ),
           ],
         ),
       )
