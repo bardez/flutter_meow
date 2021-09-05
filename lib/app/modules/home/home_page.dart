@@ -73,7 +73,7 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
                 ResponseHandlerModel response = await store.getRandomGifCat();
                 LoadingOverlay.of(context).hide();
                 if( response.status == true ){
-                  store.setImageUrl(response.data['data']['bitly_url']);
+                  store.setImageUrl(response.data['data']['image_original_url']);
                 } else {
                   showToast(response.message);
                 }
